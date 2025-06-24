@@ -1,4 +1,4 @@
-import NavLink from "./NavLink";
+import Link from "../Link";
 
 export default function Nav() {
   return (
@@ -10,9 +10,28 @@ export default function Nav() {
           </span>
           <div className="ml-10">
             <ul className="flex space-x-4">
-              <NavLink href="/">Home</NavLink>
-              <NavLink href="/about">About</NavLink>
-              <NavLink href="/contact">Contact</NavLink>
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              <li>
+                <Link href="/about">About</Link>
+              </li>
+
+              <li>
+                <Link href="/contact">Contact</Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul className="flex space-x-4">
+              <li>
+                <Link href="/login">Login</Link>
+              </li>
+              <li>
+                <Link href="/register" IsSolid>
+                  Register
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
