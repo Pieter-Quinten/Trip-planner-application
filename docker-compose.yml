@@ -1,9 +1,7 @@
-version: "3.8"
-
 services:
   postgres:
-    image: postgres:15
-    container_name: trip-planner-db
+    image: postgres:17.5
+    container_name: trip_planner-db
     restart: unless-stopped
     environment:
       POSTGRES_DB: trip_planner
@@ -13,36 +11,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
-  backend:
-    build: ./backend
-    container_name: trip-planner-backend
-    restart: unless-stopped
-    environment:
-      DATABASE_CLIENT: postgres
-      DATABASE_HOST: postgres
-      DATABASE_PORT: 5432
-      DATABASE_NAME: trip_planner
-      DATABASE_USERNAME: strapi
-      DATABASE_PASSWORD: strapi123
-      DATABASE_SSL: false
-    ports:
-      - "1337:1337"
-    depends_on:
-      - postgres
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-
-  frontend:
-    build: ./frontend
-    container_name: trip-planner-frontend
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   postgres_data:
